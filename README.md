@@ -12,8 +12,9 @@ This is a starter package which setups an express app with a pooled MongoDB data
 8. Adds a bin folder with two modules, namely, dev.js and prod.js. The dev.js imports the babel-register and transpiles es6+ on the fly. The prod.js imports a pre-transpiled code build using the custom build command
 9. Defines an architecture to be used for models using classes, and static method to alter the corresponding MongoDB collection
 10. Comes with a setup for importing environment variables
-11. Preloads modules like morgan(for logging), express.json() and cookieParser.
-12. Adds support for the following npm commands:
+11. Preloads modules like morgan(for logging), express.json() and cookieParser
+12. Defines an architecture for handling cors requests
+13. Adds support for the following npm commands:
   a. start: starts a server with nodemon on bin/dev.js
   b. clean: cleans the previous transpiled build code.
   c. build: transpiles the code into a separate dist-src folder which can be deployed.
