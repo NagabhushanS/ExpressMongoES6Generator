@@ -15,10 +15,14 @@ This is a starter package which setups an express app with a pooled MongoDB data
 11. Preloads modules like morgan(for logging), express.json() and cookieParser
 12. Defines an architecture for handling cors requests
 13. Adds support for the following npm commands:
-  a. start: starts a server with nodemon on bin/dev.js
-  b. clean: cleans the previous transpiled build code.
-  c. build: transpiles the code into a separate dist-src folder which can be deployed.
-  d. prod: starts a server with bin/prod.js
+
+    a. start: starts a server with nodemon on bin/dev.js
+
+    b. clean: cleans the previous transpiled build code.
+
+    c. build: transpiles the code into a separate dist-src folder which can be deployed.
+
+    d. prod: starts a server with bin/prod.js
   
 ## SETUP
 To setup simply clone the project and do the following:
