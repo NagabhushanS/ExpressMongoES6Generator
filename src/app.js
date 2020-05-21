@@ -8,8 +8,11 @@ import dotenv from 'dotenv';
 import DBPool from './configs/database'; 
 //routes
 import userRouter from './routes/users';
+import actionRouter from './routes/actions';
+import contactFormRouter from './routes/contactform';
 //models
 import User from './models/User';
+import ContactForm from './models/ContactForm';
 
 //setup process env
 dotenv.config();
@@ -24,11 +27,13 @@ app.use(logger('dev'));
 
 //cookie and json parsing
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //setup routes and apis
-app.use('/users', userRouter);
+app.use('/api/users', userRouter);
+app.use('/api/actions', actionRouter);
+app.use('/api/contact', contactFormRouter);
 
 //404
 app.use(function(req, res, next) {
@@ -37,7 +42,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-    res.send(err);
+    res.send("WRONG LOL");
 });
 
 //start the server on db connection
@@ -48,6 +53,7 @@ DBPool.initDB(dbURL).then((db)=>{
     app.listen(port, ()=>{
         console.log('Server listening on '+port);
         User.injectDB(db);
+        ContactForm.injectDB(db);
     });
 }).catch(err=>{
     console.log('DB Connection failure, hence server start failed!');

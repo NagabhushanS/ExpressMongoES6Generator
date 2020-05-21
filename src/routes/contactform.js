@@ -1,7 +1,6 @@
 import express from 'express';
-import User from '../models/User';
-
-const router = express.Router();
+import ContactForm from '../models/ContactForm';
+const router = new express.Router();
 
 router.options('/', (req, res)=>{
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin==null?'*':req.headers.origin);
@@ -10,25 +9,20 @@ router.options('/', (req, res)=>{
     res.send();
 });
 
-router.get('/', (req, res)=>{
-    res.setHeader('Access-Control-Allow-Origin', req.headers.origin==null?'*':req.headers.origin);
-    res.json(JSON.stringify(User.getDB()));
-});
 
 router.post('/', (req, res)=>{
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin==null?'*':req.headers.origin);
-    const userObj = req.body;
-    console.log(userObj);
-    User.addUser(userObj).then(()=>{
-        res.json({
-            ok: true,
-            username: userObj.name
+    
+    const contactForm = req.body;
+    console.log(req.body);
+    ContactForm.addContactForm(contactForm).then((validatedContactForm)=>{
+        res.status(201).json({
+            result: 'success',
+            validatedContactForm
         });
     }).catch((err)=>{
-        console.log('ERR::: ');
-        console.log(err);
-        res.json({
-            ok: false,
+        res.status(400).json({
+            result: 'failure',
             err
         });
     });
