@@ -7,9 +7,9 @@ import dotenv from 'dotenv';
 //configs
 import DBPool from './configs/database'; 
 //routes
-import userRouter from './routes/users';
+import transactionRouter from './routes/transactions';
 //models
-import User from './models/User';
+import Transaction from './models/Transaction';
 
 //setup process env
 dotenv.config();
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //setup routes and apis
-app.use('/api/users', userRouter);
+app.use('/transactionservice', transactionRouter);
 
 //404
 app.use(function(req, res, next) {
@@ -47,7 +47,7 @@ const port = process.env.PORT;
 DBPool.initDB(dbURL).then((db)=>{
     app.listen(port, ()=>{
         console.log('Server listening on '+port);
-        User.injectDB(db);
+        Transaction.injectDB(db);
     });
 }).catch(err=>{
     console.log('DB Connection failure, hence server start failed!');
